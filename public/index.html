@@ -4,9 +4,66 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ng-news</title>
+  <link rel="stylesheet" href="./client/bootstrap.min.css">
+  <link rel="stylesheet" href="./client/style.css">
 </head>
 <body ng-app="ngNews">
-  "Hello World"
+  <div class="container">
+    <!-- Header -->
+    <header class="navbar">
+      <div class="navbar-inner">
+        <h3><a class="brand" href="#">ng-News</a></h3>
+      </div>
+    </header>
+
+    <!-- New Post -->
+    <div ng-controller="postSubmitController">
+      <form class="main" id="postForm" ng-submit="submit()">
+        <div class="control-group">
+            <label class="control-label" for="url">URL</label>
+            <div class="controls">
+                <input name="url" type="text" value="" placeholder="Your URL" ng-model="url"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+                <input name="title" type="text" value="" placeholder="Name your post" ng-model="title"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="message">Message</label>
+            <div class="controls">
+                <textarea name="message" type="text" value="" ng-model="message"></textarea>
+            </div>
+        </div> 
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </div>
+        </div>
+      </form>
+
+
+      <!-- Main posts -->
+      <div id="main" class="row-fluid" ng-controller="postsController">
+        <div ng-repeat="post in posts">
+          <div class="post">
+            <div class="post-content">
+                <h3><a href="{{ post.url }}">{{ post.title }}</a>
+                <span>{{ post.message }}</span></h3>
+            </div>
+          </div>   
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer + Credits -->
   <script src="../bower_components/angular/angular.js"></script>    
   <script src="./client/app.js"></script>    
 </body>
