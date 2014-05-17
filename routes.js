@@ -8,6 +8,6 @@ module.exports = function (app) {
   });
 
   app.get('/links', function (req, res) {
-    res.json(JSON.stringify(links));
+    res.json(links.pop());
   });
 };
