@@ -11,12 +11,17 @@ angular.module('ngNews', [])
       });
       $scope.url = $scope.title = $scope.message = "";
     };
+    
     setInterval(function () {
       postsService.getLinks().then(function (post) {
         if (post.data)
-          $scope.posts.push(post.data);
+          $scope.posts = post.data;
       });
     }, 1000);  
+
+    $scope.upvote = function (post) {
+      post.upvotes += 1;
+    };
 }])
 
 .factory('postsService', ['$http', function ($http) {

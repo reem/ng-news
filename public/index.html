@@ -22,7 +22,7 @@
         <div class="control-group">
             <label class="control-label" for="url">URL</label>
             <div class="controls">
-                <input name="url" type="text" value="" placeholder="Your URL" ng-model="url"/>
+                <input name="url" type="url" value="" placeholder="Your URL" ng-model="url"/>
             </div>
         </div>
 
@@ -55,6 +55,8 @@
             <div class="post-content">
                 <h3><a href="{{ post.url }}">{{ post.title }}</a>
                 <span>{{ post.message }}</span></h3>
+                <h3>{{ post.upvotes }}</h3>
+                <button class="btn btn-primary" ng-click="upvote(post)">^</button>
             </div>
           </div>   
         </div>
