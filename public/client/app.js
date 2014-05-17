@@ -2,19 +2,35 @@ angular.module('ngNews', [])
 
 .controller('postsController', ['$scope', '$http', 'postsService', 
   function ($scope, $http, postsService) {
-    
+    $scope.posts = [];
+    $scope.submitter = function () {
+      postsService.postLink({
+        url: $scope.url,
+        title: $scope.title,
+        message: $scope.message
+      });
+      $scope.url = $scope.title = $scope.message = "";
+    };
+    setInterval(function () {
+      postsService.getLinks().then(function (post) {
+        if (post.data)
+          $scope.posts.push(post.data);
+      });
+    }, 1000);  
 }])
 
 .factory('postsService', ['$http', function ($http) {
   var postLink = function (post) {
-    return $http.post({
+    return $http({
+      method: 'POST',
       url: '/links',
       data: post
     });
   };
 
   var getLinks = function () {
-    return $http.get({
+    return $http({
+      method: 'GET',
       url: '/links'
     });
   };
